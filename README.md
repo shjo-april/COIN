@@ -106,26 +106,17 @@ Each dataset is organized using a **consistent folder structure**, allowing for 
         └── mask/
 ```
 
-Each dataset follows the structure:  
+All datasets used in this repository were restructured into a consistent folder format to support easy plug-and-play training and evaluation:
+
 ```
-./data/{dataset}/{domain}/{image or mask}/
+./data/{dataset}/{domain}/image/
+./data/{dataset}/{domain}/mask/
 ```
 
 - For most datasets, `domain` is `train/` or `test/`
 - For **PanNuke**, we follow a 3-fold split:
   - `Fold1` + `Fold2` are used for **training**
   - `Fold3` is used for **testing**
-
-> ✅ No manual reorganization needed — all datasets are ready for use with the provided scripts.
-
-### 📚 Dataset Licenses & Usage
-
-All six datasets used in this repository were restructured into a consistent folder format to support easy plug-and-play training and evaluation:
-
-```
-./data/{dataset}/{domain}/image/
-./data/{dataset}/{domain}/mask/
-```
 
 Each dataset is redistributed under its original license, with full attribution to the source authors.  
 You can find detailed license information and links in [LICENSES.md](./LICENSES.md).
