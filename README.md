@@ -42,6 +42,82 @@ python3 -m pip install git+https://github.com/lucasb-eyer/pydensecrf.git # for C
 python3 -m pip install torch==1.13.1+cu117 torchvision==0.14.1+cu117 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu117
 ```
 
+## 📁 Datasets
+
+We provide all **six datasets** used in COIN experiments, available under the `./data/` directory:
+
+- `MoNuSeg`
+- `TNBC`
+- `CPM-17`
+- `CryoNuSeg`
+- `PanNuke`
+- `BRCA`
+
+Each dataset is organized using a **consistent folder structure**, allowing for seamless integration into the pipeline.
+
+### 📦 Dataset Directory Structure
+
+```
+./data/
+├── BRCA/
+│   ├── train/
+│   │   ├── image/
+│   │   └── mask/
+│   └── test/
+│       ├── image/
+│       └── mask/
+├── CPM-17/
+│   ├── train/
+│   │   ├── image/
+│   │   └── mask/
+│   └── test/
+│       ├── image/
+│       └── mask/
+├── CryoNuSeg/
+│   ├── train/
+│   │   ├── image/
+│   │   └── mask/
+│   └── test/
+│       ├── image/
+│       └── mask/
+├── MoNuSeg/
+│   ├── train/
+│   │   ├── image/
+│   │   └── mask/
+│   └── test/
+│       ├── image/
+│       └── mask/
+├── PanNuke/
+│   ├── Fold1/       # Used as part of training
+│   │   ├── image/
+│   │   └── mask/
+│   ├── Fold2/       # Used as part of training
+│   │   ├── image/
+│   │   └── mask/
+│   └── Fold3/       # Used as test set
+│       ├── image/
+│       └── mask/
+└── TNBC/
+    ├── train/
+    │   ├── image/
+    │   └── mask/
+    └── test/
+        ├── image/
+        └── mask/
+```
+
+Each dataset follows the structure:  
+```
+./data/{dataset}/{domain}/{image or mask}/
+```
+
+- For most datasets, `domain` is `train/` or `test/`
+- For **PanNuke**, we follow a 3-fold split:
+  - `Fold1` + `Fold2` are used for **training**
+  - `Fold3` is used for **testing**
+
+> ✅ No manual reorganization needed — all datasets are ready for use with the provided scripts.
+
 ## 🧩 Step 1: Pixel-level Cell Propagation
 
 ```bash
