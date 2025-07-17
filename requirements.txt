@@ -1,0 +1,16 @@
+huggingface-hub
+PyYAML
+requests
+six
+sympy
+tokenizers
+triton
+typing_extensions
+urllib3
+tensorboard
+hydra-core==1.2.0 # for SAM2
+iopath
+timm==0.9.10 # for USS/FiT3D
+scikit-learn
+scikit-image # for Watershed
+sanghyunjo
