@@ -118,6 +118,20 @@ Each dataset follows the structure:
 
 > ✅ No manual reorganization needed — all datasets are ready for use with the provided scripts.
 
+### 📚 Dataset Licenses & Usage
+
+All six datasets used in this repository were restructured into a consistent folder format to support easy plug-and-play training and evaluation:
+
+```
+./data/{dataset}/{domain}/image/
+./data/{dataset}/{domain}/mask/
+```
+
+Each dataset is redistributed under its original license, with full attribution to the source authors.  
+You can find detailed license information and links in [LICENSES.md](./LICENSES.md).
+
+> ⚠️ **Note**: The CPM-17 dataset is not redistributed here due to unclear licensing. Please download it manually from [this repository](https://github.com/nauyan/NucleiSegmentation).
+
 ## 🧩 Step 1: Pixel-level Cell Propagation
 
 ```bash
