@@ -193,6 +193,19 @@ python evaluate.py --data MoNuSeg --domain test --tag "Ours+SSA@MoNuSeg"
 | IoU    | 0.776 (+0.158) |
 | Dice   | 0.794 (+0.219) |
 
+For benchmarks/leaderboards, use the corresponding ```{Model}@{TAG}@{domain}.json```. Because COIN uses a consistent schema across datasets, you can evaluate and submit other datasets by simply changing the tag, e.g., Ours+SSA@BRCA@test.json, PSM@CPM-17@test.json, etc.
+```
+submissions/
+├─ Ours+SSA@MoNuSeg/
+│  ├─ test/                 # SSA+COIN: semantic
+│  └─ test_instance/        # SSA+COIN: instance
+├─ SSA@MoNuSeg/
+│  ├─ test/                 # SSA: semantic 
+│  └─ test_instance/        # SSA: instance
+├─ Ours+SSA@MoNuSeg@test.json
+└─ SSA@MoNuSeg@best@test.json
+```
+
 > 🔎 **Summary**:  
 > COIN more than doubles the AJI score of the baseline and significantly improves all key metrics—**without using any annotations**.
 
