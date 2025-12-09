@@ -22,8 +22,8 @@ ins_tag = 'instance'
 if args.denoise: ins_tag += '@denoise'
 pred_ins_dir = shjo.makedir(args.exp + f'{args.tag}/{args.sem_domain}_{ins_tag}/')
 
-for image_name in shjo.progress(shjo.listdir(image_dir), args.tag):
-    pred_sem_mask = shjo.imread(pred_sem_dir + image_name.replace('.tif', '.png'), backend='mask')
+for mask_name in shjo.progress(shjo.listdir(pred_sem_dir), args.tag):
+    pred_sem_mask = shjo.imread(pred_sem_dir + mask_name, backend='mask')
 
     # print(pred_sem_dir + image_name.replace('.tif', '.png'))
     # print(pred_sem_mask.shape, np.unique(pred_sem_mask)); input()
@@ -38,4 +38,4 @@ for image_name in shjo.progress(shjo.listdir(image_dir), args.tag):
         pred_mask[pred_ins_mask == index, 0] = index // 256 # B channel
         pred_mask[pred_ins_mask == index, 1] = index  % 256 # G channel
     
-    shjo.write_image(pred_ins_dir + image_name.replace('.tif', '.png'), pred_mask)
+    shjo.write_image(pred_ins_dir + mask_name, pred_mask)

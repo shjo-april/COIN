@@ -122,7 +122,7 @@ def main(args):
     if args.decoder == 'deeplabv3+': model = networks.DeepLabv3plus_Edge(args.backbone, 2).cpu().eval()
     else: raise NotImplementedError(f'ERROR: {args.decoder}')
 
-    torch_utils.load_model(model, f'./experiments/models/{args.tag}/{args.checkpoint}.pth')
+    torch_utils.load_model(model, f'./experiments/models/{args.tag}/{args.checkpoint}.pth', strict=False)
     
     # create datasets
     test_transform = transforms.Compose([transforms.Normalize()])

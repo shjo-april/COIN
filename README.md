@@ -39,7 +39,9 @@ source ./venv/bin/activate
 python3 -m pip install -r requirements.txt
 python3 -m pip install -U "ray[default]" # parallel inference (infer_masks.py)
 python3 -m pip install git+https://github.com/lucasb-eyer/pydensecrf.git # for CRF
+
 python3 -m pip install torch==1.13.1+cu117 torchvision==0.14.1+cu117 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu117
+python3 -m pip install numpy==1.26.4
 ```
 
 ## 📁 Datasets
@@ -156,7 +158,7 @@ python3 step2_score_instances_with_SAM.py --pred "./submissions/Ours+SSA@MoNuSeg
 python3 step3_train_self_distillation.py --gpus 0 --mask "./submissions/Ours+SSA@MoNuSeg@Step1/train_sam/" --tag "Ours+SSA@MoNuSeg@Self-Distillation" --nesterov --scales 100
 
 # Run inference on the test set using the self-distilled model to generate final semantic segmentation predictions.
-python3 produce_masks.py --data MoNuSeg --gpus 0 --domain test --tag "Ours+SSA@MoNuSeg@Self-Distillation" --pred "./submissions/Ours+SSA@MoNuSeg@Self-Distillation/test/" --checkpoint last
+python3 infer_masks.py --data MoNuSeg --gpus 0 --domain test --tag "Ours+SSA@MoNuSeg@Self-Distillation" --pred "./submissions/Ours+SSA@MoNuSeg@Self-Distillation/test/" --checkpoint last
 
 # Convert the predicted semantic masks from the test set into instance-level outputs using the same semantic-to-instance method from Step 2.
 # Note: We reuse watershed-based instance generation instead of training a separate edge decoder.

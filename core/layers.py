@@ -8,10 +8,10 @@ from torch.nn import functional as F
 
 from .backbones import resnet
 from .backbones import resnest
-from .backbones import wide_resnet
+# from .backbones import wide_resnet
 
-from .backbones import swinv1
-from .backbones import swinv2
+# from .backbones import swinv1
+# from .backbones import swinv2
 
 class Backbone(nn.Module):
     def __init__(self, backbone, norm_fn='bn', act_fn='relu', pretrained=True, last_stride=2, output_stride=16):
