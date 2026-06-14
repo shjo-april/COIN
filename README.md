@@ -11,7 +11,6 @@ COIN boosts existing UCIS models (e.g., SSA [50]) by recovering error-free insta
 ## 📰 News
 
 - 📅 **ICCV 2025**: Our paper has been officially accepted to the **IEEE/CVF International Conference on Computer Vision (ICCV) 2025**, to be held in October 2025.
-- 💻 **Coming Soon**: We're currently refactoring the codebase for cleaner modularity and improved reproducibility.
 - 🚀 **Hugging Face Demo**: A live demo and pre-trained model checkpoints will soon be released via [🤗 Hugging Face Hub](https://huggingface.co/models).
 
 
@@ -158,12 +157,16 @@ python3 step2_score_instances_with_SAM.py --pred "./submissions/Ours+SSA@MoNuSeg
 python3 step3_train_self_distillation.py --gpus 0 --mask "./submissions/Ours+SSA@MoNuSeg@Step1/train_sam/" --tag "Ours+SSA@MoNuSeg@Self-Distillation" --nesterov --scales 100
 
 # Run inference on the test set using the self-distilled model to generate final semantic segmentation predictions.
-python3 infer_masks.py --data MoNuSeg --gpus 0 --domain test --tag "Ours+SSA@MoNuSeg@Self-Distillation" --pred "./submissions/Ours+SSA@MoNuSeg@Self-Distillation/test/" --checkpoint last
+# Note: `--tag` points to the trained checkpoint (./experiments/models/Ours+SSA@MoNuSeg@Self-Distillation/),
+#       while `--pred` writes the predictions directly under the canonical submission tag (Ours+SSA@MoNuSeg).
+python3 infer_masks.py --data MoNuSeg --gpus 0 --domain test --tag "Ours+SSA@MoNuSeg@Self-Distillation" --pred "./submissions/Ours+SSA@MoNuSeg/test/" --checkpoint last
 
 # Convert the predicted semantic masks from the test set into instance-level outputs using the same semantic-to-instance method from Step 2.
 # Note: We reuse watershed-based instance generation instead of training a separate edge decoder.
-python3 step2_generate_instance_masks.py --data MoNuSeg --domain test --tag "Ours+SSA@MoNuSeg@Self-Distillation"
+python3 step2_generate_instance_masks.py --data MoNuSeg --domain test --tag "Ours+SSA@MoNuSeg"
 ```
+
+> 💡 **On tags**: `@Self-Distillation` is only the training/checkpoint name under `./experiments/models/`. Its test predictions are saved under the canonical submission tag `Ours+SSA@MoNuSeg`, which is what `evaluate.py` scores below. So `Ours+SSA@MoNuSeg` and `Ours+SSA@MoNuSeg@Self-Distillation` refer to the same result.
 
 ## 🧪 Experiments
 
