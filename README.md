@@ -11,7 +11,8 @@ COIN boosts existing UCIS models (e.g., SSA [50]) by recovering error-free insta
 ## 📰 News
 
 - 📅 **ICCV 2025**: Our paper has been officially accepted to the **IEEE/CVF International Conference on Computer Vision (ICCV) 2025**, to be held in October 2025.
-- 🚀 **Hugging Face Demo**: A live demo and pre-trained model checkpoints will soon be released via [🤗 Hugging Face Hub](https://huggingface.co/models).
+- 🔖 **Pretrained Checkpoints**: Self-distilled MoNuSeg checkpoints are now available via [Google Drive](https://drive.google.com/file/d/1Ve0Y2zIj1AAbsv-uJLsapMeoAgXFoLDw/view?usp=sharing). See the **Pretrained Checkpoints** section below for setup.
+- 🚀 **Hugging Face Demo**: A live demo will soon be released via [🤗 Hugging Face Hub](https://huggingface.co/models).
 
 
 ## 📌 Citation
@@ -167,6 +168,34 @@ python3 step2_generate_instance_masks.py --data MoNuSeg --domain test --tag "Our
 ```
 
 > 💡 **On tags**: `@Self-Distillation` is only the training/checkpoint name under `./experiments/models/`. Its test predictions are saved under the canonical submission tag `Ours+SSA@MoNuSeg`, which is what `evaluate.py` scores below. So `Ours+SSA@MoNuSeg` and `Ours+SSA@MoNuSeg@Self-Distillation` refer to the same result.
+
+## 🔖 Pretrained Checkpoints
+
+To reproduce our results without running the full pipeline, download our self-distilled checkpoints and unzip them at the repository root. The archive restores the exact paths expected by `step3_train_self_distillation.py` and `infer_masks.py`, so you can skip the training in Steps 1 to 3 and go straight to inference and evaluation.
+
+📥 **Download**: [`experiments.zip` (Google Drive, ~419 MB)](https://drive.google.com/file/d/1Ve0Y2zIj1AAbsv-uJLsapMeoAgXFoLDw/view?usp=sharing)
+
+```bash
+# gdown handles Google Drive's large-file confirmation automatically
+python3 -m pip install gdown
+gdown "https://drive.google.com/uc?id=1Ve0Y2zIj1AAbsv-uJLsapMeoAgXFoLDw" -O experiments.zip
+
+# Extract at the repository root
+unzip experiments.zip
+```
+
+The archive expands into the checkpoint layout that the code reads from:
+
+```
+./experiments/
+└── models/
+    ├── Ours+SSA@MoNuSeg@Self-Distillation/   # SSA + COIN (used in the example above)
+    │   └── last.pth
+    └── Ours+PSM@MoNuSeg@Self-Distillation/   # PSM + COIN
+        └── last.pth
+```
+
+With the checkpoint in place, run the Step 3 inference command above (`--checkpoint last`) and then the evaluation in Experiments below.
 
 ## 🧪 Experiments
 
